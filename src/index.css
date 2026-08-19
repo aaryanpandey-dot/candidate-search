@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-subtle antialiased;
+    background-color: #0a0e1a;
+  }
+
+  select option {
+    background-color: #141b2e;
+    color: #f2f3f7;
+  }
+}
+
+.cosmic-bg {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0e1a 0%, #0f1b3d 55%, #0a0e1a 100%);
+}
+
+.cosmic-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(1px 1px at 8% 12%, rgba(242, 243, 247, 0.45), transparent),
+    radial-gradient(1px 1px at 18% 68%, rgba(127, 196, 232, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 32% 24%, rgba(242, 243, 247, 0.3), transparent),
+    radial-gradient(1px 1px at 45% 82%, rgba(127, 196, 232, 0.25), transparent),
+    radial-gradient(1px 1px at 58% 15%, rgba(242, 243, 247, 0.35), transparent),
+    radial-gradient(1px 1px at 67% 55%, rgba(242, 243, 247, 0.2), transparent),
+    radial-gradient(1.5px 1.5px at 74% 88%, rgba(127, 196, 232, 0.3), transparent),
+    radial-gradient(1px 1px at 82% 32%, rgba(242, 243, 247, 0.25), transparent),
+    radial-gradient(1px 1px at 91% 72%, rgba(127, 196, 232, 0.2), transparent),
+    radial-gradient(1px 1px at 95% 18%, rgba(242, 243, 247, 0.3), transparent),
+    radial-gradient(1px 1px at 25% 42%, rgba(242, 243, 247, 0.15), transparent),
+    radial-gradient(1px 1px at 52% 48%, rgba(127, 196, 232, 0.12), transparent),
+    radial-gradient(1px 1px at 88% 52%, rgba(242, 243, 247, 0.18), transparent);
+}
+
+.meteorite {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 40% 60% 55% 45% / 50% 40% 60% 50%;
+  background: radial-gradient(ellipse at 35% 35%, rgba(180, 190, 210, 0.07), rgba(120, 130, 150, 0.03));
+  filter: blur(28px);
+}
+
+.meteorite-1 {
+  width: 320px;
+  height: 280px;
+  top: -60px;
+  right: -80px;
+  opacity: 0.55;
+}
+
+.meteorite-2 {
+  width: 260px;
+  height: 220px;
+  bottom: 8%;
+  left: -70px;
+  opacity: 0.4;
+}
+
+.cosmic-content {
+  position: relative;
+  z-index: 1;
+}
+
+.card-surface {
+  @apply rounded-2xl border border-card-border bg-card shadow-glow;
+}
+
+.input-dark {
+  @apply w-full rounded-xl border border-card-border bg-card-inset px-4 py-2.5 text-sm text-heading placeholder:text-subtle/50 focus:border-ice focus:outline-none focus:ring-2 focus:ring-ice/20;
+}
+
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.accordion-content.open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+.btn-comet {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-comet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(127, 196, 232, 0.35) 50%,
+    rgba(255, 255, 255, 0.08) 65%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.btn-comet:hover:not(:disabled)::after,
+.btn-comet:focus-visible:not(:disabled)::after {
+  left: 160%;
+}
+
+.comet-track {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.comet-shooting {
+  position: absolute;
+  top: 38%;
+  left: -20%;
+  animation: comet-fly 0.85s ease-in-out infinite;
+}
+
+.comet-streak {
+  width: 140px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(127, 196, 232, 0.15), #7fc4e8, rgba(255, 255, 255, 0.9));
+  border-radius: 2px;
+  transform: rotate(-18deg);
+  box-shadow: 0 0 12px rgba(127, 196, 232, 0.6);
+}
+
+.comet-head {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  background: #f2f3f7;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(127, 196, 232, 0.9), 0 0 20px rgba(127, 196, 232, 0.5);
+}
+
+@keyframes comet-fly {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-18deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(100vw * 0.45)) translateY(120px) rotate(-18deg);
+    opacity: 0;
+  }
+}
+
+.spark-glow-circle {
+  @apply flex items-center justify-center rounded-full bg-ice-muted shadow-spark-glow;
+}
